@@ -1,4 +1,6 @@
-#This file stores all the functions necessary to calculate average and marginal tax rates
+#This file stores all the functions necessary to calculate Marriage Penalty
+
+#NOTE: These are slightly different than the tax wedge calculations. (This incorporates IRS rounding)
 
 #############Federal Tax Functions###############################
 
