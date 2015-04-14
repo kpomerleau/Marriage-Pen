@@ -1,4 +1,5 @@
-setwd("C:/Users/kep/Documents/GitHub/Marriage-Pen")
+#setwd("C:/Users/kep/Documents/GitHub/Marriage-Pen")
+setwd("C:/Users/Kyle/Documents/GitHub/Marriage-Pen")
 
 rm(list=ls()) 
 
@@ -10,9 +11,9 @@ statetax<-read.csv("statetaxdata.csv", header = TRUE, fill = TRUE, sep = ",")
 
 fedtax<-read.csv("fedtax.csv", header = TRUE, fill = TRUE, sep = ",")
 
-data<-read.csv("data.csv", header = TRUE, fill = TRUE, sep = ",")
+#data<-read.csv("data.csv", header = TRUE, fill = TRUE, sep = ",")
 
-data2<-read.csv("newdata.csv", header = TRUE, fill = TRUE, sep = ",")
+data<-read.csv("newdata.csv", header = TRUE, fill = TRUE, sep = ",")
 
 #Load Functions. One file is the basic tax functions, the burden functions are the 
 #calculations for the actual penalty/bonus
