@@ -1,3 +1,6 @@
+#This is a follow up to the marriage penalty calculator. This looks at the marginal rate penalty faced by
+#second earners in a household.
+
 setwd("C:/Users/kep/Documents/GitHub/Marriage-Pen")
 #setwd("C:/Users/Kyle/Documents/GitHub/Marriage-Pen")
 
@@ -11,14 +14,14 @@ statetax<-read.csv("statetaxdata.csv", header = TRUE, fill = TRUE, sep = ",")
 
 fedtax<-read.csv("fedtax.csv", header = TRUE, fill = TRUE, sep = ",")
 
-#data<-read.csv("data.csv", header = TRUE, fill = TRUE, sep = ",")
+data<-read.csv("data.csv", header = TRUE, fill = TRUE, sep = ",")
 
-data<-read.csv("newdata400.csv", header = TRUE, fill = TRUE, sep = ",")
+#data<-read.csv("newdata400.csv", header = TRUE, fill = TRUE, sep = ",")
 
 #Load Functions. One file is the basic tax functions, the burden functions are the 
 #calculations for the actual penalty/bonus
 
-source("avgfunctions.R")
+source("marginalfunctions.R")
 
 taxburden1<-function(income1,children,married,hoh,stateincometax){
   
@@ -96,11 +99,15 @@ marriedtaxburden<-function(income,children,married,hoh,stateincometax){
   
 }
 
-#No Children
+#####No Children; set up those parameters:
 
 children<-0
 hoh<-0
-output_nochildren<-data$income
+
+#Setup the output files for each earner
+
+output_primary_nochildren<-data$income
+output_secondary_nochildren<-data$income
 
 x<-1
 
@@ -110,7 +117,8 @@ while(x <= length(data$multiplier)){
   
   i<-1
   
-  penalty<-NULL
+  penaltyprimary<-NULL
+  penaltysecondary<-NULL
   
   while(i <= length(data$income)){
     
@@ -121,26 +129,76 @@ while(x <= length(data$multiplier)){
     income1<-income*multiplier
     income2<-income*(1-multiplier)
 
-    person1<-taxburden1(income1,children,married,hoh,stateincometax)
+    person1<-taxburden1(income1+1,children,married,hoh,stateincometax)-taxburden1(income1,children,married,hoh,stateincometax) #primary earner's marginal rate
     
-    person2<-taxburden2(income2,children,married,hoh,stateincometax)
+    person2<-taxburden2(income2+1,children,married,hoh,stateincometax)-taxburden2(income2,children,married,hoh,stateincometax) #secondary earner's marginal rate
+      
+    couple<-marriedtaxburden(income+1,children,married,hoh,stateincometax)-marriedtaxburden(income,children,married,hoh,stateincometax) #the couple's marginal rate
     
-    singleburden<-(person1+person2)
-    
-    couple<-marriedtaxburden(income,children,married,hoh,stateincometax)
-    
-    penalty[i]<-couple-(singleburden)
+    penaltyprimary[i]<-couple-(person1)
+    penaltysecondary[i]<-couple-(person2)
     
     i<-i+1
     
   }
   
   
-  output_nochildren<-cbind(output_nochildren,penalty)
+  output_primary_nochildren<-cbind(output_primary_nochildren,penaltyprimary)
+  output_secondary_nochildren<-cbind(output_secondary_nochildren,penaltysecondary)
   
   x<-x+1
   
 }
+
+toutput_secondary_nochildren<-t(output_secondary_nochildren)
+write.table(toutput_secondary_nochildren,sep=",",file="testmarginalrates.txt")
+
+  #Heat Map (I broke this badly. Needs to be fixed!!!)
+
+  if (!require("gplots")) {
+    install.packages("gplots", dependencies = TRUE)
+    library(gplots)
+  }
+  if (!require("RColorBrewer")) {
+    install.packages("RColorBrewer", dependencies = TRUE)
+    library(RColorBrewer)
+  }
+
+    #trim dataset for heatmap
+
+      map_data<-toutput_secondary_nochildren[2:nrow(toutput_secondary_nochildren),]
+  
+    #Color of the heatmap
+
+      my_palette <- colorRampPalette(c("red", "white", "blue"))(n = 299)
+
+    #Defined Color Breaks
+
+    # (optional) defines the color breaks manually for a "skewed" color transition
+      #col_breaks = c(seq(-1,0,length=100),  # for red
+       #              seq(0,0.8,length=100),              # for yellow
+        #             seq(0.8,1,length=100))              # for green
+
+    #creates the image
+
+      # creates a 5 x 5 inch image
+      #png("../images/heatmaps_in_r.png",    # create PNG for the heat map        
+        #  width = 5*300,        # 5 x 300 pixels
+        #  height = 5*300,
+        #  res = 300,            # 300 pixels per inch
+        #  pointsize = 8)        # smaller font size
+
+   # heatmap.2(toutput_secondary__nochildren,
+    #          cellnote = toutput_secondary__nochildren,  # same data set for cell labels
+    #          main = "Second Earner Penalty", # heat map title
+    #          notecol="black",      # change font color of cell labels to black
+    #          density.info="none",  # turns off density plot inside color legend
+    #          trace="none",         # turns off trace lines inside the heat map
+    #          margins =c(12,9),     # widens margins around plot
+    #          col=my_palette,       # use on color palette defined earlier 
+    #          #breaks=col_breaks,    # enable color transition at specified limits
+    #          dendrogram="row",     # only draw a row dendrogram
+    #          Colv="NA")            # turn off column clustering
 
 #One Child
 
@@ -293,7 +351,7 @@ toutput_twochildren<-t(output_twochildren)
 
 #percent
 
-poutput_nochildren<-
+poutput_nochildren<-t(output_nochildrenchild)
 poutput_onechild<-t(output_onechild)
 poutput_twochildren<-t(output_twochildren)
 
