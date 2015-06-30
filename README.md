@@ -10,16 +10,16 @@ This calculator's data was featured in both the New York Times and Fivethirtyeig
 **Files:**
 
 * **data.csv:** A data set with two variables: income from 10,000 to 1,000,000 scaled by 100^1/100 and ratios from 1 to .5
-* fedtax.csv: A data set with income tax parameters. These parameters are read by the tax calculator functions
-* newdata.csv: A data set with two variables: income from 10,000 to 1,000,000 scaled by 200^1/200 and ratios from 1 to .5
-* newdata400.csv: A data set with two variables: income from 10,000 to 1,000,000 scaled by 400^1/400 and ratios from 1 to .5
-* avgfunctions.R: An R script that defines all the functions for the tax calculator
-* marginalfunctions.R: An alternative script that properly measures marginal tax rates (it smooths IRS rounding)
-* Marriage Marginal.R: A test script that looks at second-earner penalties for married couples (STILL TESTINGS)
-* Penalty Checker.R: The main R script that calculates all output data
+* **fedtax.csv:** A data set with income tax parameters. These parameters are read by the tax calculator functions
+* **newdata.csv:** A data set with two variables: income from 10,000 to 1,000,000 scaled by 200^1/200 and ratios from 1 to .5
+* **newdata400.csv:** A data set with two variables: income from 10,000 to 1,000,000 scaled by 400^1/400 and ratios from 1 to .5
+* **avgfunctions.R:** An R script that defines all the functions for the tax calculator
+* **marginalfunctions.R:** An alternative script that properly measures marginal tax rates (it smooths IRS rounding)
+* **Marriage Marginal.R:* A test script that looks at second-earner penalties for married couples (STILL TESTINGS)
+* **Penalty Checker.R:** The main R script that calculates all output data
 * There are also misc. output files in the repo produced by the Penalty Checker.R script
 
-**File Details**
+#File Details
 
 **data/newdata/newdata400.csv:**
 
@@ -29,7 +29,7 @@ Variable | Defintion
 `multiplier` | `The percent of total family income the primary earner brings home`
 
 **avgfunctions.R**
-*The same functions exist in marginalfunctions.R, they are only slightly altered
+* The same functions exist in **marginalfunctions.R**, they are only slightly altered
 
 Function and Inputs | Defintion
 ---|---------
