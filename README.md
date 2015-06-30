@@ -19,7 +19,7 @@ This calculator's data was featured in both the New York Times and Fivethirtyeig
 * **Penalty Checker.R:** The main R script that calculates all output data
 * There are also misc. output files in the repo produced by the Penalty Checker.R script
 
-#File Details
+##File Details
 
 **data/newdata/newdata400.csv:**
 
