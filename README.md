@@ -4,12 +4,12 @@ This Repo Contains the data and code for the paper: "Understanding the Marriage 
 Link : http://taxfoundation.org/article/understanding-marriage-penalty-and-marriage-bonus
 
 This calculator's data was featured in both the New York Times and Fivethirtyeight piece on the marriage penalty
-NYT link: http://www.nytimes.com/interactive/2015/04/16/upshot/marriage-penalty-couples-income.html
-Fivethirtyeight link: http://fivethirtyeight.com/interactives/marriage-penalty/
+* NYT link: http://www.nytimes.com/interactive/2015/04/16/upshot/marriage-penalty-couples-income.html
+* Fivethirtyeight link: http://fivethirtyeight.com/interactives/marriage-penalty/
 
 **Files:**
 
-* data.csv: A data set with two variables: income from 10,000 to 1,000,000 scaled by 100^1/100 and ratios from 1 to .5
+* **data.csv:** A data set with two variables: income from 10,000 to 1,000,000 scaled by 100^1/100 and ratios from 1 to .5
 * fedtax.csv: A data set with income tax parameters. These parameters are read by the tax calculator functions
 * newdata.csv: A data set with two variables: income from 10,000 to 1,000,000 scaled by 200^1/200 and ratios from 1 to .5
 * newdata400.csv: A data set with two variables: income from 10,000 to 1,000,000 scaled by 400^1/400 and ratios from 1 to .5
