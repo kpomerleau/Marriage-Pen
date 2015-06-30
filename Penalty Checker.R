@@ -5,15 +5,11 @@ rm(list=ls())
 
 #This spreadsheet has all the income data and will show all the calculations, step-by-step.
 
-income<-read.csv("income.csv", header = TRUE, fill = TRUE, sep = ",")
-
-statetax<-read.csv("statetaxdata.csv", header = TRUE, fill = TRUE, sep = ",")
-
 fedtax<-read.csv("fedtax.csv", header = TRUE, fill = TRUE, sep = ",")
 
-#data<-read.csv("data.csv", header = TRUE, fill = TRUE, sep = ",")
-
-data<-read.csv("newdata400.csv", header = TRUE, fill = TRUE, sep = ",")
+#data<-read.csv("data.csv", header = TRUE, fill = TRUE, sep = ",") #This is for 100 by 100 grid
+ 
+data<-read.csv("newdata400.csv", header = TRUE, fill = TRUE, sep = ",") #This is for the 400 by 400 grid
 
 #Load Functions. One file is the basic tax functions, the burden functions are the 
 #calculations for the actual penalty/bonus
